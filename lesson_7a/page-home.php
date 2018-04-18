@@ -1,6 +1,5 @@
 <?php get_header(); ?>
 <div class="row">
-    <div class="col-xs-12">
 
         <?php
             $args = array(
@@ -13,7 +12,11 @@
 
                 while( $lastBlog->have_posts() ): $lastBlog->the_post(); ?>
 
-                <?php get_template_part('template-parts/content','featured'); ?>
+                <div class="col-xs-12 col-sm-4">
+
+                    <?php get_template_part('template-parts/content','featured'); ?>
+
+                </div>
 
                 <?php endwhile;
 
@@ -22,7 +25,8 @@
             wp_reset_postdata();
          ?>
 
-    </div>
+</div>
+<div class="row">
     <div class="col-xs-12 col-sm-8">
         <?php
 
