@@ -5,6 +5,8 @@
             $args = array(
                 'type' => 'post',
                 'posts_per_page' => 3,
+                'category__in' => array( 8, 10, 11 ),
+                'category__not_in' => array( 9 ),
             );
             $lastBlog = new WP_Query($args);
 
