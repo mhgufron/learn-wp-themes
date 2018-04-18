@@ -22,11 +22,12 @@ $lastBlog = new WP_Query($args);
 - Cara menampilkan lates post per kategori
 1. Buat perulangan category id
 2. Didalam perulangan buat array $args seperti sebelumnya
- - 'type' => 'post',
- - 'posts_per_page' => 1,
- - 'category__in' => $cat_id,
- - 'category__not_in' => array( 9 ),
+     - 'type' => 'post',
+     - 'posts_per_page' => 1,
+     - 'category__in' => $cat_id,
+     - 'category__not_in' => array( 9 ),
 3. Contoh Code
+
 ```php
 $categories = array( 8, 10, 11 ); //kategori id yang ingin ditampilkan
 foreach ($categories as $category) :
