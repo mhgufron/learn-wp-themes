@@ -2,10 +2,19 @@
 <div class="row">
 
         <?php
+
+        $args_cat = array(
+            'include' => '8, 10, 11',
+        );
+
+        $categories = get_categories($args_cat);
+
+        foreach ($categories as $category) :
+
             $args = array(
                 'type' => 'post',
-                'posts_per_page' => 3,
-                'category__in' => array( 8, 10, 11 ),
+                'posts_per_page' => 1,
+                'category__in' => $category->term_id,
                 'category__not_in' => array( 9 ),
             );
             $lastBlog = new WP_Query($args);
@@ -25,6 +34,9 @@
             endif;
 
             wp_reset_postdata();
+
+        endforeach;
+
          ?>
 
 </div>
