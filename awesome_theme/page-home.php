@@ -2,154 +2,154 @@
 
 <div class="row">
 
-		<div class="col-xs-12">
+        <div class="col-xs-12">
 
-		<div id="awesome-carousel" class="carousel slide" data-ride="carousel">
+        <div id="awesome-carousel" class="carousel slide" data-ride="carousel">
 
-		  <!-- Wrapper for slides -->
-		  <div class="carousel-inner" role="listbox">
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner" role="listbox">
 
-			<?php
+            <?php
 
-			$args_cat = array(
-				'include' => '8, 10, 11',
-			);
+            $args_cat = array(
+                'include' => '8, 10, 11',
+            );
 
-				$categories = get_categories($args_cat);
-				$count = 0;
-				$bullets = '';
-				foreach($categories as $category):
+                $categories = get_categories($args_cat);
+                $count = 0;
+                $bullets = '';
+                foreach($categories as $category):
 
-					$args = array(
-						'type' => 'post',
-						'posts_per_page' => 1,
-						'category__in' => $category->term_id,
-		                'category__not_in' => array( 9 ),
-					);
+                    $args = array(
+                        'type' => 'post',
+                        'posts_per_page' => 1,
+                        'category__in' => $category->term_id,
+                        'category__not_in' => array( 9 ),
+                    );
 
-					$lastBlog = new WP_Query( $args );
+                    $lastBlog = new WP_Query( $args );
 
-					if( $lastBlog->have_posts() ):
+                    if( $lastBlog->have_posts() ):
 
-						while( $lastBlog->have_posts() ): $lastBlog->the_post(); ?>
+                        while( $lastBlog->have_posts() ): $lastBlog->the_post(); ?>
 
-							<div class="item <?php if($count == 0): echo 'active'; endif; ?>">
-						      <?php the_post_thumbnail('full'); ?>
-						      <div class="carousel-caption">
-							      <?php the_title( sprintf('<h1 class="entry-title"><a href="%s">', esc_url( get_permalink() ) ),'</a></h1>' ); ?>
+                            <div class="item <?php if($count == 0): echo 'active'; endif; ?>">
+                              <?php the_post_thumbnail('full'); ?>
+                              <div class="carousel-caption">
+                                  <?php the_title( sprintf('<h1 class="entry-title"><a href="%s">', esc_url( get_permalink() ) ),'</a></h1>' ); ?>
 
-								  <small><?php the_category(' '); ?></small>
-						      </div>
-						    </div>
+                                  <small><?php the_category(' '); ?></small>
+                              </div>
+                            </div>
 
-						    <?php $bullets .= '<li data-target="#awesome-carousel" data-slide-to="'.$count.'" class="'; ?>
-						    <?php if($count == 0): $bullets .='active'; endif; ?>
+                            <?php $bullets .= '<li data-target="#awesome-carousel" data-slide-to="'.$count.'" class="'; ?>
+                            <?php if($count == 0): $bullets .='active'; endif; ?>
 
-						    <?php  $bullets .= '"></li>'; ?>
+                            <?php  $bullets .= '"></li>'; ?>
 
-						<?php endwhile;
+                        <?php endwhile;
 
-					endif;
+                    endif;
 
-					wp_reset_postdata();
+                    wp_reset_postdata();
 
-				$count++;
+                $count++;
 
-				endforeach;
+                endforeach;
 
-			?>
+            ?>
 
-			<!-- Indicators -->
-			  <ol class="carousel-indicators">
-			    <?php echo $bullets; ?>
-			  </ol>
+            <!-- Indicators -->
+              <ol class="carousel-indicators">
+                <?php echo $bullets; ?>
+              </ol>
 
-		  </div>
+          </div>
 
-		  <!-- Controls -->
-		  <a class="left carousel-control" href="#awesome-carousel" role="button" data-slide="prev">
-		    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-		    <span class="sr-only">Previous</span>
-		  </a>
-		  <a class="right carousel-control" href="#awesome-carousel" role="button" data-slide="next">
-		    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-		    <span class="sr-only">Next</span>
-		  </a>
-		</div>
+          <!-- Controls -->
+          <a class="left carousel-control" href="#awesome-carousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#awesome-carousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
 
-		</div>
+    </div>
 
 </div>
 
 <div class="row">
 
-	<div class="col-xs-12 col-sm-8">
+    <div class="col-xs-12 col-sm-8">
 
-		<?php
+        <?php
 
-		if( have_posts() ):
+        if( have_posts() ):
 
-			while( have_posts() ): the_post(); ?>
+            while( have_posts() ): the_post(); ?>
 
-				<?php get_template_part('content',get_post_format()); ?>
+                <?php get_template_part('content',get_post_format()); ?>
 
-			<?php endwhile;
+            <?php endwhile;
 
-		endif;
+        endif;
 
-		//PRINT OTHER 2 POSTS NOT THE FIRST ONE
+        //PRINT OTHER 2 POSTS NOT THE FIRST ONE
 /*
-		$args = array(
-			'type' => 'post',
-			'posts_per_page' => 2,
-			'offset' => 1,
-		);
+        $args = array(
+            'type' => 'post',
+            'posts_per_page' => 2,
+            'offset' => 1,
+        );
 
-		$lastBlog = new WP_Query($args);
+        $lastBlog = new WP_Query($args);
 
-		if( $lastBlog->have_posts() ):
+        if( $lastBlog->have_posts() ):
 
-			while( $lastBlog->have_posts() ): $lastBlog->the_post(); ?>
+            while( $lastBlog->have_posts() ): $lastBlog->the_post(); ?>
 
-				<?php get_template_part('content',get_post_format()); ?>
+                <?php get_template_part('content',get_post_format()); ?>
 
-			<?php endwhile;
+            <?php endwhile;
 
-		endif;
+        endif;
 
-		wp_reset_postdata();
+        wp_reset_postdata();
 */
 
-		?>
+        ?>
 
-		<!-- <hr> -->
+        <!-- <hr> -->
 
-		<?php
+        <?php
 
-		//PRINT ONLY TUTORIALS
+        //PRINT ONLY TUTORIALS
 /*
-		$lastBlog = new WP_Query('type=post&posts_per_page=-1&category_name=news');
+        $lastBlog = new WP_Query('type=post&posts_per_page=-1&category_name=news');
 
-		if( $lastBlog->have_posts() ):
+        if( $lastBlog->have_posts() ):
 
-			while( $lastBlog->have_posts() ): $lastBlog->the_post(); ?>
+            while( $lastBlog->have_posts() ): $lastBlog->the_post(); ?>
 
-				<?php get_template_part('content',get_post_format()); ?>
+                <?php get_template_part('content',get_post_format()); ?>
 
-			<?php endwhile;
+            <?php endwhile;
 
-		endif;
+        endif;
 
-		wp_reset_postdata();
+        wp_reset_postdata();
 */
 
-		?>
+        ?>
 
-	</div>
+    </div>
 
-	<div class="col-xs-12 col-sm-4">
-		<?php get_sidebar(); ?>
-	</div>
+    <div class="col-xs-12 col-sm-4">
+        <?php get_sidebar(); ?>
+    </div>
 
 </div>
 
