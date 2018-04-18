@@ -17,6 +17,7 @@
                 'category__in' => $category->term_id,
                 'category__not_in' => array( 9 ),
             );
+            
             $lastBlog = new WP_Query($args);
 
             if( $lastBlog->have_posts() ):

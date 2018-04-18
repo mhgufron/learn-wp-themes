@@ -42,3 +42,7 @@ $lastBlog = new WP_Query($args);
     endforeach;
     ```
 - Nested Looping adalah looping didalam looping, hal ini bisa memberatkan server jika data yang di load banyak, jika datanya banyak lebih baik jangan digunakan
+
+1. One
+2. Two
+3. Three
