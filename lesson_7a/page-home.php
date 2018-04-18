@@ -3,8 +3,11 @@
     <div class="col-xs-12">
 
         <?php
-
-            $lastBlog = new WP_Query('type=post&posts_per_page=1');
+            $args = array(
+                'type' => 'post',
+                'posts_per_page' => 3,
+            );
+            $lastBlog = new WP_Query($args);
 
             if( $lastBlog->have_posts() ):
 
@@ -52,7 +55,7 @@
         */
         ?>
 
-        <hr>
+        <!-- <hr> -->
 
         <?php
         // Print Only Tutorials
