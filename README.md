@@ -2,7 +2,7 @@
 
 ## A. Wordpress 101 Tutorials
 
-### 1. WordPress 101 - Part 10: Filter the WP_Query with categories
+### 10. WordPress 101 - Part 10: Filter the WP_Query with categories
 
 Catatan Belajar
 - Selama masa Development jangan hapus source code jika tidak dibutuhkan cukup comment saja
@@ -40,13 +40,27 @@ endforeach;
 ```
 - Nested Looping adalah looping didalam looping, hal ini bisa memberatkan server jika data yang di load banyak, jika datanya banyak lebih baik jangan digunakan
 
-### 2. WordPress 101 - Part 11: The single.php file, tags, edit links and comment template
+### 11. WordPress 101 - Part 11: The single.php file, tags, edit links and comment template
 
 Catatan Belajar
 
 - `single.php` adalah file yang digunakan untuk menampilkan detail artikel dari blog.
 - `single.php` sama seperti index harus di include header dan footernya
 -
+
+### 14. WordPress 101 - Part 14: Edit the menu with the Walker Class - Part 1
+
+Terkadang ada menu yang memiliki submenu dan itu akan terlihat jelek. Untuk menangani hal ini kita yang kita perlukan adalah walker class. untuk memuatnya kita dianjurkan untuk membuat file baru dan mengincludnya di `function.php`
+Langkah-Langkah Membuat Walker Class
+
+1. Buat class bebas dengan extends Walker_Nav_Menu
+2. Didalam class buat function
+  - `start_lvl()` membuat markup ul
+  - `start_el()` membuat markup li a span
+  - `end_el()` membuat closing markup li a span
+  - `end_lvl()` membuat closing markup ul
+  
+
 
 ## Fungsi-Fungsi yang Digunakan di Wordpress Front End
 
@@ -61,7 +75,16 @@ Catatan Belajar
 - `has_post_thumbnail()` Untuk mengecek apakah ada featured
 
 ## Fungsi-Fungsi yang Digunakan di Wordpress Back End
+
+- `add_theme_support()` menambah suport Wordpress
+- `wp_enqueue_style()` menambah style di wordpress dari file `functions.php`
+- `wp_enqueue_script()` menambah javascript di wordpress dari file `functions.php`
+- `add_action()` hook untuk memanggil function yang telah dibuat
+- `register_nav_menu()` membuat nav menu
+- `register_sidebar()` untuk membuat sidebar widget
+
 ## File yang Digunakan di Wordpress
+
 - `index.php` file utama yang dituju saat halaman di load
 - `header.php` file yang berisi header web
 - `footer.php` file yang berisi footer web
