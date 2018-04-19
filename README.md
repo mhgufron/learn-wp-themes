@@ -22,10 +22,6 @@ $lastBlog = new WP_Query($args);
 - Cara menampilkan lates post per kategori
 1. Buat perulangan category id
 2. Didalam perulangan buat array $args seperti sebelumnya
-     - 'type' => 'post',
-     - 'posts_per_page' => 1,
-     - 'category__in' => $cat_id,
-     - 'category__not_in' => array( 9 ),
 3. Contoh Code
 
 ```php
@@ -43,3 +39,25 @@ foreach ($categories as $category) :
 endforeach;
 ```
 - Nested Looping adalah looping didalam looping, hal ini bisa memberatkan server jika data yang di load banyak, jika datanya banyak lebih baik jangan digunakan
+
+### 2. WordPress 101 - Part 11: The single.php file, tags, edit links and comment template
+
+Catatan Belajar
+
+- `single.php` adalah file yang digunakan untuk menampilkan detail artikel dari blog.
+- `single.php` sama seperti index harus di include header dan footernya
+-
+
+## Fungsi-Fungsi yang Digunakan di Wordpress Front End
+
+- `get_header()` menginclude file header.php
+- `get_footer()` menginclude file footer.php
+- `get_sidebar()` menginclude file sidebar.php
+- `get_template_part()` menginclude file sesuai parameter  
+    `get_template_part('content')` include file content.php  
+    `get_template_part('content','featured')` include file content-featured.php  
+- `get_template_directory_uri()` url dari tema wordpress
+- `have_posts()` Untuk mengecek apakah ada post di Wordpress
+- `has_post_thumbnail()` Untuk mengecek apakah ada featured
+
+## Fungsi-Fungsi yang Digunakan di Wordpress Back End

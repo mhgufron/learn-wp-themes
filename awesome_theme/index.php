@@ -48,6 +48,7 @@
         </div>
 
     </div>
+    <?php var_dump(the_post()); ?>
 
     <div class="col-xs-12 col-sm-4">
         <?php get_sidebar(); ?>
