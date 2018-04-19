@@ -34,10 +34,10 @@
             <?php $i++; endwhile;?>
 
             <div class="col-xs-6 text-left">
-                <?php next_posts_link('<< Older Post'); ?>
+                <?php next_posts_link('<< '); ?>
             </div>
             <div class="col-xs-6 text-right">
-                <?php previous_posts_link('Newer Post >>'); ?>
+                <?php previous_posts_link(' >>'); ?>
             </div>
 
         <?php endif; ?>
