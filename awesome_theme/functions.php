@@ -73,4 +73,4 @@ add_action('widgets_init','awesome_widget_setup');
 	==========================================
 */
 
-require get_template_directory_uri() . '/inc/walker.php';
+require get_template_directory() . '/inc/walker.php';

@@ -1,14 +1,6 @@
 # Wordpress Theme Development
 
-## A. Wordpress 101 Tutorials
-
-### 10. WordPress 101 - Part 10: Filter the WP_Query with categories
-
-Catatan Belajar
-- Selama masa Development jangan hapus source code jika tidak dibutuhkan cukup comment saja
-
-- Template part memudahkan development dengan source yang sama, kita hanya perlu memanggil fungsi
-`get_template_part()`
+## A. Wordpress 101 Tutorials### 10. WordPress 101 - Part 10: Filter the WP_Query with categoriesCatatan Belajar- Selama masa Development jangan hapus source code jika tidak dibutuhkan cukup comment saja- Template part memudahkan development dengan source yang sama, kita hanya perlu memanggil fungsi`get_template_part()`
 
 ```php
 $args = array(
@@ -54,12 +46,58 @@ Terkadang ada menu yang memiliki submenu dan itu akan terlihat jelek. Untuk mena
 Langkah-Langkah Membuat Walker Class
 
 1. Buat class bebas dengan extends Walker_Nav_Menu
-2. Didalam class buat function
-  - `start_lvl()` membuat markup ul
-  - `start_el()` membuat markup li a span
-  - `end_el()` membuat closing markup li a span
-  - `end_lvl()` membuat closing markup ul
-  
+```php
+class Walker_Nav_Primary extends Walker_Nav_menu
+{
+    # code...
+}
+```
+2. Didalam class buat function `start_lvl()`, `start_el()`, `end_el()`, `end_lvl()`
+3. Contoh kode
+```php
+function start_lvl() // ul
+{
+    # code...
+}
+
+function start_el() // li a span
+{
+    # code...
+}
+
+function end_el() // closing li a span
+{
+    # code...
+}
+
+function end_lvl() // closing ul
+{
+    # code...
+}
+```
+4. Buat function start_lvl
+```php
+function start_lvl( &$output, $depth ) // ul
+{
+    $indent     = str_repeat("/t", $depth);
+    $submenu    = ($depth > 0) ? " sub-menu" : "";
+    $output     .= "\n$indent<ul class=\"dropdown-menu$submenu depth_$depth\">\n";
+}
+```
+5. Tambahkan array walker di `header.php` cari `wp_nav_menu()`
+```php
+wp_nav_menu(
+    array(
+        'theme_location' => 'primary',
+        'container' => false,
+        'menu_class' => 'nav navbar-nav navbar-right',
+        'walker'    => new Walker_Nav_Primary(), // tambah kan script disini
+    )
+);
+```
+
+
+
 
 
 ## Fungsi-Fungsi yang Digunakan di Wordpress Front End
