@@ -21,7 +21,7 @@ $lastBlog = new WP_Query($args);
 ```
 - Cara menampilkan lates post per kategori
 1. Buat perulangan category id
-2. Didalam perulangan buat array $args seperti sebelumnya
+2. Didalam perulangan buat array $args seperti sebelumnya   
 3. Contoh Code
 
 ```php
@@ -54,8 +54,8 @@ Catatan Belajar
 - `get_footer()` menginclude file footer.php
 - `get_sidebar()` menginclude file sidebar.php
 - `get_template_part()` menginclude file sesuai parameter  
-    `get_template_part('content')` include file content.php  
-    `get_template_part('content','featured')` include file content-featured.php  
+    mis:    - `get_template_part('content')` include file content.php  
+            - `get_template_part('content','featured')` include file content-featured.php  
 - `get_template_directory_uri()` url dari tema wordpress
 - `have_posts()` Untuk mengecek apakah ada post di Wordpress
 - `has_post_thumbnail()` Untuk mengecek apakah ada featured
