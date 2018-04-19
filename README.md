@@ -54,10 +54,25 @@ Catatan Belajar
 - `get_footer()` menginclude file footer.php
 - `get_sidebar()` menginclude file sidebar.php
 - `get_template_part()` menginclude file sesuai parameter  
-    mis:    - `get_template_part('content')` include file content.php  
-            - `get_template_part('content','featured')` include file content-featured.php  
+  - `get_template_part('content')` include file content
+  - `get_template_part('content','featured')` include file content-featured.php  
 - `get_template_directory_uri()` url dari tema wordpress
 - `have_posts()` Untuk mengecek apakah ada post di Wordpress
 - `has_post_thumbnail()` Untuk mengecek apakah ada featured
 
 ## Fungsi-Fungsi yang Digunakan di Wordpress Back End
+## File yang Digunakan di Wordpress
+- `index.php` file utama yang dituju saat halaman di load
+- `header.php` file yang berisi header web
+- `footer.php` file yang berisi footer web
+- `sidebar.php` file yang berisi sidebar web
+- `single.php` file yang digunakan untuk menampilkan detail dari artikel/post
+- `functions.php` file yang mengatur backend dari Wordpress
+- `page-{slug}.php` file yang mereplace halaman yang memiliki slug/url yang sama
+- `page-{id}.php` file yang mereplace halaman yang memiliki id yang sama
+- `search.php` file yang mengatur tampilan hasil dari search artikel
+- `searchform.php` file yang mereplace search form baik yang custem maupun widget
+- `404.php` file yang akan tampil jika mengakses url dan halaman tidak ditemukan
+- `comment.php` File yang akan menggantikan comment form
+- `archive.php`
+- `author.php`
