@@ -13,13 +13,13 @@
 				<div class="thumbnail"><?php the_post_thumbnail('medium'); ?></div>
 			</div>
 			<div class="col-xs-12 col-sm-8">
-				<?php the_content(); ?>
+				<?php the_excerpt(); ?>
 			</div>
 
 		<?php else: ?>
 
 			<div class="col-xs-12">
-				<?php the_content(); ?>
+				<?php the_excerpt(); ?>
 			</div>
 
 		<?php endif; ?>

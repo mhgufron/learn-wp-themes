@@ -1,6 +1,10 @@
 # Wordpress Theme Development
 
-## A. Wordpress 101 Tutorials### 10. WordPress 101 - Part 10: Filter the WP_Query with categoriesCatatan Belajar- Selama masa Development jangan hapus source code jika tidak dibutuhkan cukup comment saja- Template part memudahkan development dengan source yang sama, kita hanya perlu memanggil fungsi`get_template_part()`
+## A. Wordpress 101 Tutorials
+### 10. WordPress 101 - Part 10: Filter the WP_Query with categories
+
+- Selama masa Development jangan hapus source code jika tidak dibutuhkan cukup comment saja
+- Template part memudahkan development dengan source yang sama, kita hanya perlu memanggil fungsi`get_template_part()`
 
 ```php
 $args = array(
@@ -33,8 +37,6 @@ endforeach;
 - Nested Looping adalah looping didalam looping, hal ini bisa memberatkan server jika data yang di load banyak, jika datanya banyak lebih baik jangan digunakan
 
 ### 11. WordPress 101 - Part 11: The single.php file, tags, edit links and comment template
-
-Catatan Belajar
 
 - `single.php` adalah file yang digunakan untuk menampilkan detail artikel dari blog.
 - `single.php` sama seperti index harus di include header dan footernya
@@ -75,7 +77,7 @@ function end_lvl() // closing ul
     # code...
 }
 ```
-4. Buat function start_lvl
+4. Buat function start_lvl di `walker.php`
 ```php
 function start_lvl( &$output, $depth ) // ul
 {
@@ -96,10 +98,83 @@ wp_nav_menu(
 );
 ```
 
+### 15. WordPress 101 - Part 15: Edit the menu with the Walker Class - Part 2
+1. Buat function start_el di `walker.php`
+```php
+function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) // li a span
+{
+    $indent     = ($depth) ? str_repeat("\t", $depth) : "";
 
+    $li_attributes  = "";
+    $class_names    = $value = "";
 
+    $classes    = empty( $item->classes ) ? array() : (array) $item->classes;
 
+    $classes[]  = ($args->walker->has_children) ? "dropdown" : "";
+    $classes[]  = ($item->current || $item->current_item_anchestor) ? 'active' : '';
+    $classes[]  = 'menu-item-' . $item->ID;
+    if ( $depth && $args->has_children) {
+        $classes[] = 'dropdown-submenu';
+    }
 
+    $class_names = join( ' ', apply_filters('nav_menu_css_class', array_filter( $classes ), $item, $args ) );
+    $class_names = ' class="' . esc_attr($class_names) . '" ';
+
+    $id = apply_filters('nav_menu_item_id', 'menu-item-'.$item->ID, $item, $args);
+    $id = strlen( $id ) ? ' id="' . esc_attr($id) . '" ' : '';
+
+    $output .= $indent . '<li' . $id . $value . $class_names . $li_attributes . '>';
+
+    $attributes = ! empty( $item->attr_title) ? ' title="' . esc_attr($item->attr_title) . '"' : '';
+    $attributes .= ! empty( $item->target) ? ' target="' . esc_attr($item->attr_title) . '"' : '';
+    $attributes .= ! empty( $item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
+    $attributes .= ! empty( $item->url) ? ' href="' . esc_attr($item->url) . '"' : '';
+
+    $attributes .= ( $args->walker->has_children ) ? ' class="dropdown-toggle" data-toggle="dropdown"' : '';
+
+    $item_output = $args->before;
+
+    $item_output .= '<a' . $attributes . '>';
+    $item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
+    $item_output .= ( $depth == 0 && $args->walker->has_children) ? ' <b class="caret"></b></a>' : '</a>';
+    $item_output .= $args->after;
+
+    $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
+
+}
+```
+
+### 16. WordPress 101 - Part 16: How to print the bloginfo
+Fungsi `bloginfo()` adalah menampilkan data yang diperlukan di header seperti title, charset dan info lain yang diperlukan oleh sebuah halaman
+
+1. Menambah language di html tag
+```php
+<html <?php language_attributes(); ?>>
+```
+2. Menambah meta charset
+```php
+<meta charset="<?php bloginfo('charset') ?>">
+```
+3. Membuat title menjadi dinamis
+```php
+<title><?php bloginfo('name') ?><?php the_title('|') ?></title>
+```
+4. Menambah meta description
+```php
+<meta name="description" content="<?php bloginfo('description'); ?>">
+```
+5. Menghapus Wordpress version di header tag  
+ Buat function untuk menghapus wordpress version di `functions.php`
+```php
+function awesome_remove_version() // penamaan function bebas
+{
+	return '';// mengembalikan string kosong sehingga datanya tidak ada
+}
+add_filter('the_generator', 'awesome_remove_version');
+```
+Untuk parameter fungsi `bloginfo()` dan keterangannya bisa langsud baca di codex
+
+### 17.
 ## Fungsi-Fungsi yang Digunakan di Wordpress Front End
 
 - `get_header()` menginclude file header.php

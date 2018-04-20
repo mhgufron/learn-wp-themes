@@ -24,7 +24,7 @@
 /**
  * Walker_Nav_Primary
  */
-class Walker_Nav_Primary extends Walker_Nav_menu
+class Walker_Nav_Primary extends Walker_Nav_Menu
 {
 
     function start_lvl( &$output, $depth ) // ul
