@@ -413,6 +413,14 @@ get_header(); ?>
 
   register_taxonomy('field', array('portfolio'), $args);
   ```
+  4. Jalankan fungsi dengan menambahkan hook tulis di luar fungsi
+  ```php
+  function awesome_custom_taxonomies()
+  {
+      // code...
+  }
+  add_action('init', 'awesome_custom_taxonomies');
+  ```
 
 
 
