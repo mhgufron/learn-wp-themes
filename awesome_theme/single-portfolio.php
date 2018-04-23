@@ -22,27 +22,11 @@
                     <?php endif; ?>
 
                     <small>
-                        <?php
-
-                        $terms_list = wp_get_post_terms($post->ID, 'field');
-
-                        $i = 0;
-                        foreach ($terms_list as $term) { $i++;
-                            echo ($i > 1) ? ', ': '';
-                            echo $term->name;
+                        <?php echo awesome_post_terms($post->ID, 'field'); ?> || <?php echo awesome_post_terms($post->ID, 'software'); ?> <?php
+                        if (current_user_can('manage_options')) {
+                            echo " || "; edit_post_link();
                         }
-
-                          ?> || <?php
-
-                          $terms_list = wp_get_post_terms($post->ID, 'software');
-
-                          $i = 0;
-                          foreach ($terms_list as $term) { $i++;
-                              echo ($i > 1) ? ', ': '';
-                              echo $term->name;
-                          }
-
-                            ?> || <?php edit_post_link(); ?></small>
+                         ?></small>
 
                     <?php the_content(); ?>
 

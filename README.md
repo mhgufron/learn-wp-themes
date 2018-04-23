@@ -456,8 +456,35 @@ foreach ($terms_list as $term) { $i++;
     echo $term->name;
 } ?>
 ```
+### 22. WordPress 101 - Part 22: Custom Taxonomy link and user capabilities
 
+- Membuat custom function yang bisa dipanggil di front-end
+- Buat function bebas misal `awesome_get_terms()`
+- Copy script dibawah untuk membuat custom function terms
+```php
+function awesome_post_terms($postID, $term)
+{
+    $terms_list = wp_get_post_terms($postID, $term);
+    $output     = '';
 
+    $i = 0;
+    foreach ($terms_list as $term) { $i++;
+        if ($i > 1) { $output .= ', '; }
+        $output .= $term->name;
+    }
+
+    return $output;
+}
+```
+- Untuk menghilangkan separator `||` pembatas terakhir saat user tidak login tidak dapat mengedit
+- Edit file `single-portfolio.php` cari || <?php edit_post_link ?> ganti dengan kode dibawah
+```php
+<?php
+if (current_user_can('manage_options')) {
+    echo " || "; edit_post_link();
+}
+ ?>
+```
 
 
 
@@ -469,6 +496,10 @@ foreach ($terms_list as $term) { $i++;
 
 - `get_header()` menginclude file header.php
 - `get_footer()` menginclude file footer.php
+- `the_content()`
+- `the_title()`
+- `the_ID()`
+- `the_post_thumbnail()`
 - `get_sidebar()` menginclude file sidebar.php
 - `get_template_part()` menginclude file sesuai parameter  
   - `get_template_part('content')` include file content
@@ -486,6 +517,7 @@ foreach ($terms_list as $term) { $i++;
 - `the_widget($widget, $instance, $args)` Memanggil widget tertentu sesuai $widget untuk paramnya bisa di lihat di [the_widget](https://codex.wordpress.org/Function_Reference/the_widget)
 - `get_search_form()` Menampilkan searchform
 - `wp_list_categories()` Membuat custom category
+- `current_user_can()` Mengecek role user
 
 ## C. Fungsi-Fungsi yang Digunakan di Wordpress Back End
 
