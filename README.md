@@ -382,7 +382,7 @@ get_header(); ?>
 
 
 
-## Fungsi-Fungsi yang Digunakan di Wordpress Front End
+## B. Fungsi-Fungsi yang Digunakan di Wordpress Front End
 
 - `get_header()` menginclude file header.php
 - `get_footer()` menginclude file footer.php
@@ -404,7 +404,7 @@ get_header(); ?>
 - `get_search_form()` Menampilkan searchform
 - `wp_list_categories()` Membuat custom category
 
-## Fungsi-Fungsi yang Digunakan di Wordpress Back End
+## C. Fungsi-Fungsi yang Digunakan di Wordpress Back End
 
 - `add_theme_support()` menambah suport Wordpress
 - `wp_enqueue_style()` menambah style di wordpress dari file `functions.php`
@@ -415,7 +415,7 @@ get_header(); ?>
 - `register_sidebar()` untuk membuat sidebar widget
 - `register_post_type()` membuat post type
 
-## File yang Digunakan di Wordpress
+## D. File yang Digunakan di Wordpress
 
 - `index.php` file utama yang dituju saat halaman di load
 - `header.php` file yang berisi header web
@@ -431,4 +431,4 @@ get_header(); ?>
 - `404.php` file yang akan tampil jika mengakses url dan halaman tidak ditemukan
 - `comment.php` File yang akan menggantikan comment form
 - `archive.php` File yang menangani ketika archive link diklik/category di klik
-- `author.php`
+- `author.php` file yang menampilkan daftar post dari author tertentu
