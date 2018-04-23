@@ -330,10 +330,14 @@ add_action('init', 'awesome_custom_post_type');
 ### 19. WordPress 101 - Part 19: How to create Custom Post Type - Part 2
 
 - isikan beberapa post di post type portfolio
-- hapus page dengan nama portfolio karena memiliki url yang sama misal:
+- hapus page dengan nama portfolio untuk menghindari error karena memiliki url yang sama misal:
   post url: http://localhost:7000/portfolio/  
   post type url: http://localhost:7000/portfolio/wordpress-template  
-  
+- duplicate file `single.php` menjadi `single-portfolio.php` untuk menampilkan detail artikel dari post type
+- Duplicate file `archive.php` menjadi `archive-portfolio.php` untuk membuat archive dari portfolio  
+  archive post type url: http://localhost:7000/portfolio/  
+- tidak bisa mengakses `archive post url` atau `single post type url` kamu harus mengubah settingan permalink di `Settings->Permalinks` pilih salah satu misal plain lalu kembalikan seperti semula buka kembali `single post type url` atau `archive post type url`
+
 
 
 
