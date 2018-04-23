@@ -449,7 +449,7 @@ foreach ($terms_list as $term) { $i++;
 ```php
 <?php
 
-$terms_list = wp_get_post_terms($post->ID, 'software');
+$terms_list = wp_get_post_terms($post->ID, 'Software');
 $i = 0;
 foreach ($terms_list as $term) { $i++;
     echo ($i > 1) ? ', ': '';
