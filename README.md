@@ -298,7 +298,7 @@ Langkah-langkah Membuat 404 Page
 - `the_posts_navigation()` Membuat Pagination dengan Numbering ada angkanya
 - `the_archive_title($before, $after)` Membuat title di archive page `$before` = sebelum title `$after` = setelah title
 - `the_archive_description($before, $after)` Menampilkan deskripsi dari kategori deskripsi `$before` dan `$after`  sama seperti sebelumnya
-- `the_widget($widget, $instance, $args)` Memanggil widget tertentu sesuai $widget untuk paramnya bisa di lihat di `[the_widget]`(https://codex.wordpress.org/Function_Reference/the_widget)
+- `the_widget($widget, $instance, $args)` Memanggil widget tertentu sesuai $widget untuk paramnya bisa di lihat di [the_widget](https://codex.wordpress.org/Function_Reference/the_widget)
 - `get_search_form()` Menampilkan searchform
 - `wp_list_categories()` Membuat custom category
 
@@ -310,6 +310,7 @@ Langkah-langkah Membuat 404 Page
 - `add_action()` hook untuk memanggil function yang telah dibuat
 - `register_nav_menu()` membuat nav menu
 - `register_sidebar()` untuk membuat sidebar widget
+- `register_post_type()` membuat post type
 
 ## File yang Digunakan di Wordpress
 
@@ -325,5 +326,5 @@ Langkah-langkah Membuat 404 Page
 - `searchform.php` file yang mereplace search form baik yang custem maupun widget
 - `404.php` file yang akan tampil jika mengakses url dan halaman tidak ditemukan
 - `comment.php` File yang akan menggantikan comment form
-- `archive.php`
+- `archive.php` File yang menangani ketika archive link diklik/category di klik
 - `author.php`
