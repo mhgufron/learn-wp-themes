@@ -337,8 +337,38 @@ add_action('init', 'awesome_custom_post_type');
 - Duplicate file `archive.php` menjadi `archive-portfolio.php` untuk membuat archive dari portfolio  
   archive post type url: http://localhost:7000/portfolio/  
 - tidak bisa mengakses `archive post url` atau `single post type url` kamu harus mengubah settingan permalink di `Settings->Permalinks` pilih salah satu misal plain lalu kembalikan seperti semula buka kembali `single post type url` atau `archive post type url`
+- Untuk membuat menunya kita bisa membuat page dengan nama yang berbeda dengan `post type` misal `Work` lalu buat file `page-portfolio-template.php` untuk membuat template page dengan isi list post type portfolio Misal:
+```php
+<?php
 
+/*
+	Template Name: Portfolio Template
+*/
 
+get_header(); ?>
+
+	<?php
+
+    $args = array('post_type' => 'portfolio', 'posts_per_page' => 3 );
+    $loop = new WP_Query( $args );
+
+	if( $loop->have_posts() ):
+
+		while( $loop->have_posts() ): $loop->the_post(); ?>
+
+            <?php get_template_part('content', 'archive'); ?>
+
+		<?php endwhile;
+
+	endif;
+
+	?>
+
+<?php get_footer(); ?>
+
+```
+- edit post `Work` di bagian kanan bawah di panel `Page Attributes` pada bagian `Template` pilih `Portfolio Template`
+- buka tampilan wordpress dan klik menu `Work`,
 
 
 
