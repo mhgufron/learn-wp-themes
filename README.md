@@ -174,7 +174,93 @@ add_filter('the_generator', 'awesome_remove_version');
 ```
 Untuk parameter fungsi `bloginfo()` dan keterangannya bisa langsud baca di codex
 
-### 17.
+### 17. WordPress 101 - Part 17: How to create a custom Archive and 404 page
+
+#### A. Archive
+Archive adalah halaman saat kamu mengeklik bulan dan tahun di sidebar menu atau kategori setelah mengeklik link tersebu kita diarahkan ke halaman blog, untuk menangani hal ini kita harus membuat halaman archive.
+Langkah-langkah membuat halaman archive:
+1. Buat file bernama `archive.php`
+2. Copy semua file index dan hapus script yang ada di dalam loop while
+3. di dalam while tuliskan
+```php
+<?php while( have_posts() ): the_post(); ?>
+
+    <?php get_template_part('content', 'archive') ?>
+
+<?php endwhile;?>
+```
+4. Buat file bernama `content-file.php` pastekan kode berikut
+```php
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
+	<header class="entry-header">
+		<?php the_title( sprintf('<h1 class="entry-title"><a href="%s">', esc_url( get_permalink() ) ),'</a></h1>' ); ?>
+		<small>Posted on: <?php the_time('F j, Y'); ?> at <?php the_time('g:i a'); ?>, in <?php the_category(); ?></small>
+	</header>
+
+	<div class="row">
+
+		<?php if( has_post_thumbnail() ): ?>
+
+			<div class="col-xs-12 col-sm-4">
+				<div class="thumbnail"><?php the_post_thumbnail('medium'); ?></div>
+			</div>
+			<div class="col-xs-12 col-sm-8">
+				<?php the_excerpt(); ?>
+			</div>
+
+		<?php else: ?>
+
+			<div class="col-xs-12">
+				<?php the_excerpt(); ?>
+			</div>
+
+		<?php endif; ?>
+	</div>
+
+</article>
+```
+#### B. 404 Page
+
+404 page adalah halaman error jika user menginputkan alamat yang salah/tidak ditemukan di dalam web tersebut
+Langkah-langkah Membuat 404 Page
+1. Buat file bernama `404.php`
+2. Pastekan kode berikut:
+```php
+<?php get_header(); ?>
+    <div id="primary" class="container">
+        <main id="main" class="site-main" role="main">
+            <div class="error-404 not-found">
+                <head class="page-header">
+                    <h1 class="page-title">Sorry, page not found</h1>
+                </head>
+                <div class="page-content">
+                    <h3>It looks like nothing was found at this location, maybe try one of the links below or a search?</h3>
+                    <?php get_search_form()$ // menampilkan search form ?>
+                    <?php the_widget('WP_Widget_Recent_Posts'); // Memanggil Recent Post Widget ?>
+                    <div class="widget widget_categories">
+                        <h3>Check the most used categories</h3>
+                        <ul>
+                            <?php
+                            // membuat custom list categories
+                             wp_list_categories( array(
+                                 'orderby'  => 'count',
+                                 'order'    => 'DESC',
+                                 'show_count'   => 1,
+                                 'title_li'     => '',
+                                 'number'       => 5,
+                             ) );
+                             ?>
+                        </ul>
+                    </div>
+                    <?php the_widget('WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$archive_content"); // Memanggil Archive widget ?>
+                </div>
+            </div>
+        </main>
+    </div>
+<?php get_footer(); ?>
+
+```
 
 
 
@@ -205,6 +291,16 @@ Untuk parameter fungsi `bloginfo()` dan keterangannya bisa langsud baca di codex
 - `get_template_directory_uri()` url dari tema wordpress
 - `have_posts()` Untuk mengecek apakah ada post di Wordpress
 - `has_post_thumbnail()` Untuk mengecek apakah ada featured
+- `next_posts_link()` Membuat Pagination Next `di blog`
+- `previous_posts_link()` Membuat Pagination Next `di blog`
+- `next_post_link()` Membuat Pagination Next `di single`
+- `previous_post_link()` Membuat Pagination Next `di single`
+- `the_posts_navigation()` Membuat Pagination dengan Numbering ada angkanya
+- `the_archive_title($before, $after)` Membuat title di archive page `$before` = sebelum title `$after` = setelah title
+- `the_archive_description($before, $after)` Menampilkan deskripsi dari kategori deskripsi `$before` dan `$after`  sama seperti sebelumnya
+- `the_widget($widget, $instance, $args)` Memanggil widget tertentu sesuai $widget untuk paramnya bisa di lihat di `[the_widget]`(https://codex.wordpress.org/Function_Reference/the_widget)
+- `get_search_form()` Menampilkan searchform
+- `wp_list_categories()` Membuat custom category
 
 ## Fungsi-Fungsi yang Digunakan di Wordpress Back End
 
