@@ -119,10 +119,7 @@ function awesome_custom_post_type()
         'capability_type'       => 'post',
         'publicly_queryable'    => true,
         'exclude_form_search'   => false,
-        'taxonomies' => array(
-            'category',
-            'post_tag',
-        ),
+        // 'taxonomies' => array( 'category', 'post_tag', ),
         'supports' => array(
             'title',
             'editor',
@@ -134,3 +131,36 @@ function awesome_custom_post_type()
     register_post_type('portfolio', $args);
 }
 add_action('init', 'awesome_custom_post_type');
+
+function awesome_custom_taxonomies()
+{
+    // add new taxonomy hieararchical
+    $labels = array(
+        'name'          => 'Fields',
+        'singular_name' => 'Field',
+        'search_items'  => 'Search Fields',
+        'all_items'     => 'All Fields',
+        'edit_item'     => 'Edit Field',
+        'update_item'   => 'Update Field',
+        'add_new_item'  => 'Add New Field',
+        'new_item_name' => 'New Field Name',
+        'menu_name'     => 'Fields',
+        'parent_item'   => 'Parent Field',
+        'parent_item_colon' => 'Parent Field:',
+    );
+
+    $args = array(
+        'hierarchical'  => true,
+        'labels'        => $labels,
+        'show_ui'       => true,
+        'query_var'     => true,
+        'rewrite'       => array( 'slug' => 'field' ),
+        'show_admin_column' => true,
+    );
+
+    register_taxonomy('field', array('portfolio'), $args);
+
+    // add new taxonomy NOT hierarchical
+}
+
+add_action( 'init', 'awesome_custom_taxonomies' );
