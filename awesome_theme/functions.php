@@ -161,6 +161,12 @@ function awesome_custom_taxonomies()
     register_taxonomy('field', array('portfolio'), $args);
 
     // add new taxonomy NOT hierarchical
+
+    register_taxonomy('software', 'portfolio', array(
+        'label'         => 'Software',
+        'rewrite'       => array( 'slug' => 'software' ),
+        'hierarchical'  => false,
+    ) );
 }
 
 add_action( 'init', 'awesome_custom_taxonomies' );

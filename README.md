@@ -421,8 +421,41 @@ get_header(); ?>
   }
   add_action('init', 'awesome_custom_taxonomies');
   ```
+### 21. WordPress 101 - Part 21: How to create Custom Taxonomies - Part 2
 
+- Membuat Custom Taxonomies Not Hierarchical (tag)
+- tambahkan `register_taxonomy` di bawah `register_taxonomy('field', array('portfolio'), $args);`
+```php
+// add new taxonomy NOT hierarchical
 
+register_taxonomy('software', 'portfolio', array(
+    'label'         => 'Software',
+    'rewrite'       => array( 'slug' => 'software' ),
+    'hierarchical'  => false,
+) );
+```
+- Edit `<?php the_category(); ?>` di `single-portfolio.php`
+```php
+<?php
+
+$terms_list = wp_get_post_terms($post->ID, 'field');
+$i = 0;
+foreach ($terms_list as $term) { $i++;
+    echo ($i > 1) ? ', ': '';
+    echo $term->name;
+} ?>
+```
+- Edit `<?php the_tags(); ?>` di `single-portfolio.php`
+```php
+<?php
+
+$terms_list = wp_get_post_terms($post->ID, 'software');
+$i = 0;
+foreach ($terms_list as $term) { $i++;
+    echo ($i > 1) ? ', ': '';
+    echo $term->name;
+} ?>
+```
 
 
 
