@@ -175,6 +175,25 @@ add_filter('the_generator', 'awesome_remove_version');
 Untuk parameter fungsi `bloginfo()` dan keterangannya bisa langsud baca di codex
 
 ### 17.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Fungsi-Fungsi yang Digunakan di Wordpress Front End
 
 - `get_header()` menginclude file header.php
