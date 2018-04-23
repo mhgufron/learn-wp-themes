@@ -262,10 +262,78 @@ Langkah-langkah Membuat 404 Page
 
 ```
 
+### 18. WordPress 101 - Part 18: How to create Custom Post Type - Part 1
 
+Post Type adalah custom dari post biasa digunakan untuk membuat review, portfolio dll bisa dibilang post yang khusus untuk tujuan tertentu saja berbeda dengan post yang biasa `post type` memiliki menu sendiri bisa dicustom langsung saja langkah-langkah pembuatan `Custom Post Type`
 
+1. Buka file `function.php`
+2. Buat Function `awesome_custom_post_type()` nama bisa bebas
+```php
+function awesome_custom_post_type()
+{
+    // code...
+}
+```
+3. Di dalam function buat variabel $labels untuk custom label menu di admin panel
+```php
+$labels = array(
+    'name'          => 'Portfolio',
+    'singular_name' => 'Portfolio',
+    'add_new'       => 'Add Item',
+    'all_items'     => 'All Items',
+    'add_new_item'  => 'Add Item',
+    'edit_item'     => 'Edit Item',
+    'new_item'      => 'New Item',
+    'view_item'     => 'View Item',
+    'search_item'   => 'Search Portfolio',
+    'not_found'     => 'No Item Found',
+    'not_found_in_trash' => 'No Item Found In Trash',
+    'parent_item_colon'  => 'Parent Item'
+);
+```
+4. Buat variabel $args argument untuk custom post type
+```php
+$args = array(
+    'labels'    => $labels,
+    'public'    => true,
+    'query_var' => true,
+    'rewrite'   => true,
+    'has_archive'   => true,
+    'hieararchical' => false,
+    'menu_position' => 5,
+    'capability_type'       => 'post',
+    'publicly_queryable'    => true,
+    'exclude_form_search'   => false,
+    'taxonomies' => array(
+        'category',
+        'post_tag',
+    ),
+    'supports' => array(
+        'title',
+        'editor',
+        'excerpt',
+        'thumbnail',
+        'revisions',
+    ),
+);
+```
+5. tambahkan `register_post_type('portfolio', $args);` di akhir fungsi
+6. Aktifkan fungsi menggunakan hook tulis diluar fungsi
+```php
+function awesome_custom_post_type()
+{
+    // code...
+}
+add_action('init', 'awesome_custom_post_type');
+```
 
+### 19. WordPress 101 - Part 19: How to create Custom Post Type - Part 2
 
+- isikan beberapa post di post type portfolio
+- hapus page dengan nama portfolio karena memiliki url yang sama misal:
+  post url: http://localhost:7000/portfolio/  
+  post type url: http://localhost:7000/portfolio/wordpress-template  
+  
 
 
 
@@ -308,6 +376,7 @@ Langkah-langkah Membuat 404 Page
 - `wp_enqueue_style()` menambah style di wordpress dari file `functions.php`
 - `wp_enqueue_script()` menambah javascript di wordpress dari file `functions.php`
 - `add_action()` hook untuk memanggil function yang telah dibuat
+- `add_filter()` membuat filter dengan function
 - `register_nav_menu()` membuat nav menu
 - `register_sidebar()` untuk membuat sidebar widget
 - `register_post_type()` membuat post type
@@ -319,6 +388,7 @@ Langkah-langkah Membuat 404 Page
 - `footer.php` file yang berisi footer web
 - `sidebar.php` file yang berisi sidebar web
 - `single.php` file yang digunakan untuk menampilkan detail dari artikel/post
+- `single-{slug}.php` file yang digunakan untuk menampilkan detail dari `Post Type`
 - `functions.php` file yang mengatur backend dari Wordpress
 - `page-{slug}.php` file yang mereplace halaman yang memiliki slug/url yang sama
 - `page-{id}.php` file yang mereplace halaman yang memiliki id yang sama
